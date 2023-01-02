@@ -1,0 +1,388 @@
+$(document).ready(function() {
+		
+	$("#file").change(function() {
+        var file = this.files[0];
+        var imagefile = file.type;
+        var match= ["image/jpeg","image/png","image/jpg"];
+        if(!((imagefile==match[0]) || (imagefile==match[1]) || (imagefile==match[2]))){
+            alert('Please select a valid image file (JPEG/JPG/PNG).');
+            $("#file").val('');
+            return true;
+        }
+    });
+	$("#imgInp").change(function() {
+        var file = this.files[0];
+        var imagefile = file.type;
+        var match= ["image/jpeg","image/png","image/jpg"];
+        if(!((imagefile==match[0]) || (imagefile==match[1]) || (imagefile==match[2]))){
+            alert('Please select a valid image file (JPEG/JPG/PNG).');
+            $("#imgInp").val('');
+            return true;
+        }
+    });
+	$("#phone,#fax,#zip,#amount,#age").keydown(function(e) {
+		       if (e.shiftKey)
+		           e.preventDefault();
+		       else {
+		           var nKeyCode = e.keyCode;
+		           //Ignore Backspace and Tab keys
+		           if (nKeyCode == 8 || nKeyCode == 9)
+		               return;
+		           if (nKeyCode < 95) {
+		               if (nKeyCode < 48 || nKeyCode > 57)
+		                   e.preventDefault();
+		           } else {
+		               if (nKeyCode < 96 || nKeyCode > 105)
+		               e.preventDefault();
+		           }
+		       }
+    });
+	
+		  
+      $('#amount').keypress(function(e){ 
+      if (this.value.length == 0 && e.which == 48 ){
+      return false;
+   }
+});
+
+$('input:text[name="first_name"],input:text[name="last_name"],#company_name,#full_name').bind('keyup blur', function() {
+			var txt = '';
+			txt = $(this).val();
+			$(this).val(txt.replace(/[^A-Za-z.\s]/g, ''));
+			txt = $(this).val();
+			$(this).val(capitalizeWord(txt));
+			
+});
+		
+$("#fname").change(function(){
+    
+var fname=$("#fname").val();
+ if(fname=='' || fname.length<3)
+  {
+    $('#fname').css('border', '1px solid red');
+  	$('#fname').val("");
+    $("#fname").focus();
+   	$("#first_name").text("First Name should have 3 characters");
+  	$("#first_name").css("color", "red");
+	$("#first_name").css("font-size", "15px");
+	return flase;
+	
+  }
+  else {
+    $('#fname').css('border', '1px solid green');
+	$("#first_name").text("");
+  }
+});	
+
+$("#lname").change(function(){   
+var lname=$("#lname").val();
+ if(lname=='' || lname.length<3)
+  {
+    $('#lname').css('border', '1px solid red');
+  	$('#lname').val("");
+    $("#lname").focus();
+   	$("#last_name").text("Last Name should have 3 characters");
+  	$("#last_name").css("color", "red");
+	$("#last_name").css("font-size", "15px");
+	return flase;
+	
+  }
+  else {
+    $('#lname').css('border', '1px solid green');
+	$("#last_name").text("");
+  }
+});	
+
+$("#program_name").change(function(){   
+var program_name=$("#program_name").val();
+ if(program_name=='' || program_name.length<3)
+  {
+    $('#program_name').css('border', '1px solid red');
+  	$('#program_name').val("");
+    $("#program_name").focus();
+   	$("#program").text("Participant Name should have 3 characters");
+  	$("#program").css("color", "red");
+	$("#program").css("font-size", "15px");
+	return flase;
+	
+  }
+  else {
+    $('#program_name').css('border', '1px solid green');
+	$("#program").text("");
+  }
+});	
+
+$("#contact_name").change(function(){   
+var contact_name=$("#contact_name").val();
+ if(contact_name=='' || contact_name.length<3)
+  {
+    $('#contact_name').css('border', '1px solid red');
+  	$('#contact_name').val("");
+    $("#contact_name").focus();
+   	$("#contact").text("Contact Name should have 3 characters");
+  	$("#contact").css("color", "red");
+	$("#contact").css("font-size", "15px");
+	return flase;
+	
+  }
+  else {
+    $('#contact_name').css('border', '1px solid green');
+	$("#contact").text("");
+  }
+});
+
+$("#message").change(function(){   
+var message=$("#message").val();
+ if(message=='' || message.length<10)
+  {
+    $('#message').css('border', '1px solid red');
+  	$('#message').val("");
+    $("#message").focus();
+   	$("#msg").text("Message/Comments should have 10 characters");
+  	$("#msg").css("color", "red");
+	$("#msg").css("font-size", "15px");
+	return flase;
+	
+  }
+  else {
+    $('#message').css('border', '1px solid green');
+	$("#msg").text("");
+  }
+});	
+
+$("#participant_name").change(function(){   
+var participant_name=$("#participant_name").val();
+ if(participant_name=='' || participant_name.length<3)
+  {
+    $('#participant_name').css('border', '1px solid red');
+  	$('#participant_name').val("");
+    $("#participant_name").focus();
+   	$("#participant").text("Participant Name should have 3 characters");
+  	$("#participant").css("color", "red");
+	$("#participant").css("font-size", "15px");
+	return flase;
+	
+  }
+  else {
+    $('#participant_name').css('border', '1px solid green');
+	$("#participant").text("");
+  }
+});
+
+$("#cellphone").change(function(){   
+var cellphone=$("#cellphone").val();
+ if(cellphone=='' || cellphone.length<10)
+  {
+    $('#cellphone').css('border', '1px solid red');
+  	$('#cellphone').val("");
+    $("#cellphone").focus();
+   	$("#phone").text("Mobile Number should have 10 numbers");
+  	$("#phone").css("color", "red");
+	$("#phone").css("font-size", "15px");
+	return flase;
+	
+  }
+  else {
+    $('#cellphone').css('border', '1px solid green');
+	$("#phone").text("");
+  }
+});	
+
+$("#program_duration").change(function(){   
+var program_duration=$("#program_duration").val();
+ if(program_duration>10 || program_duration<=0)
+  {
+    $('#program_duration').css('border', '1px solid red');
+  	$('#program_duration').val("");
+    $("#program_duration").focus();
+   	$("#duration").text(" Maximum duration is 10min");
+  	$("#duration").css("color", "red");
+	$("#duration").css("font-size", "15px");
+	return flase;
+	
+  }
+  else {
+    $('#program_duration').css('border', '1px solid green');
+	$("#duration").text("");
+  }
+});	
+
+$("#num_of_participants").change(function(){   
+var num_of_participants=$("#num_of_participants").val();
+ if(num_of_participants<8 || num_of_participants>=100)
+  {
+    $('#num_of_participants').css('border', '1px solid red');
+  	$('#num_of_participants').val("");
+    $("#num_of_participants").focus();
+   	$("#max").text("Participants should be 8 or greater");
+  	$("#max").css("color", "red");
+	$("#max").css("font-size", "15px");
+	return flase;
+	
+  }
+  else {
+    $('#num_of_participants').css('border', '1px solid green');
+	$("#max").text("");
+  }
+});
+
+$("#age").change(function(){   
+var age=$("#age").val();
+ if(age>60 || age<6 )
+  {
+    $('#age').css('border', '1px solid red');
+  	$('#age').val("");
+    $("#age").focus();
+   	$("#max_age").text("Participants age between (6-60)");
+  	$("#max_age").css("color", "red");
+	$("#max_age").css("font-size", "15px");
+	return flase;
+	
+  }
+  else {
+    $('#age').css('border', '1px solid green');
+	$("#max_age").text("");
+  }
+});
+
+
+$("#addr").change(function(){   
+var addr=$("#addr").val();
+ if(addr=='' || addr.length<5)
+  {
+    $('#addr').css('border', '1px solid red');
+  	$('#addr').val("");
+    $("#addr").focus();
+   	$("#address").text("Address should have 5 characters");
+  	$("#address").css("color", "red");
+	$("#address").css("font-size", "15px");
+	return flase;
+	
+  }
+  else {
+    $('#addr').css('border', '1px solid green');
+	$("#address").text("");
+  }
+});	
+
+$("#city").change(function(){   
+var city=$("#city").val();
+ if(city=='' || city.length<3)
+  {
+    $('#city').css('border', '1px solid red');
+  	$('#city').val("");
+    $("#city").focus();
+   	$("#cityid").text("city should have 3 characters");
+  	$("#cityid").css("color", "red");
+	$("#cityid").css("font-size", "15px");
+	return flase;
+	
+  }
+  else {
+    $('#city').css('border', '1px solid green');
+	$("#cityid").text("");
+  }
+});	
+		
+		
+$("#email").change(function(){
+    
+var email=$("#email").val();
+ if(validateEmail(email))
+  {
+	  $('#email').css('border', '1px solid green');
+	  $("#emailid").text("");
+  }
+  else {
+    $('#email').css('border', '1px solid red');
+  	$('#email').val("");
+    $("#email").focus();
+   	$("#emailid").text("Enter valid email address");
+  	$("#emailid").css("color", "red");
+	$("#emailid").css("font-size", "15px");
+  }
+});
+
+  $("#phone").on("blur", function() {
+      var last = $(this).val().substr( $(this).val().indexOf("-") + 1 );
+
+      if( last.length == 5 ) {
+          var move = $(this).val().substr( $(this).val().indexOf("-") + 1, 1 );
+
+          var lastfour = last.substr(1,4);
+
+          var first = $(this).val().substr( 0, 9 );
+
+          $(this).val( first + move + '-' + lastfour );
+      }
+  });
+  $("#full_name").change(function(){   
+var full_name=$("#full_name").val();
+ if(full_name=='' || full_name.trim().length<3)
+  {
+    $('#full_name').css('border', '1px solid red');
+  	$('#full_name').val("");
+    $("#full_name").focus();
+   	$("#name").text("Full Name should have 5 characters");
+  	$("#name").css("color", "red");
+	$("#name").css("font-size", "15px");
+	return flase;
+	
+  }
+  else {
+	$("#name").text("");
+  }
+});	
+
+$("#register").click(function(){   
+ var password=$("#password").val();
+ var repassword=$("#repassword").val();
+ if(password != repassword)
+  {
+    $('#repassword').val("");
+    $("#repassword").focus();
+   	$("#pass").text("password must be same");
+  	$("#pass").css("color", "red");
+	$("#pass").css("font-size", "15px");
+	return false;
+	
+  }
+  else {
+    $("#pass").text("");
+  }
+});
+
+$("#register").click(function(){   
+ var password=$("#password").val();
+ var oldpassword=$("#oldpassword").val();
+ if(password == oldpassword)
+  {
+    $('#password').val("");
+	$('#repassword').val("");
+    $("#password").focus();
+   	$("#oldpass").text("Old password and new password should not be same");
+  	$("#oldpass").css("color", "red");
+	$("#oldpass").css("font-size", "15px");
+	return false;
+	
+  }
+  else {
+    $("#oldpass").text("");
+  }
+});
+
+});
+
+function percentCalculation(a, b){
+  var c = (parseFloat(a)*parseFloat(b))/100;
+  return parseFloat(c);
+}	
+
+function validateEmail(email) {
+  var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(email);
+}
+function capitalizeWord(txt){
+		//Capitalizing the each word
+		return txt.replace(/^(.)|\s(.)/g, function($1){ return $1.toUpperCase( ); });
+}
